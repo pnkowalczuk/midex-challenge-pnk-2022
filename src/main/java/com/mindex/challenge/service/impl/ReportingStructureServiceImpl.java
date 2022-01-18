@@ -9,7 +9,7 @@ public class ReportingStructureServiceImpl implements ReportingStructureService{
     
 
     public ReportingStructure compute(String id){
-        ReportingStructure rs = new ReportingStructure("noid");
+        ReportingStructure rs = new ReportingStructure("no id");
         return rs;
     }
 }
