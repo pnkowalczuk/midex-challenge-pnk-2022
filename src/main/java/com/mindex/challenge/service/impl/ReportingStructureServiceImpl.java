@@ -31,16 +31,13 @@ public class ReportingStructureServiceImpl implements ReportingStructureService{
         for(int i = 0; i < directReports.size(); i++){
             Employee curEmp = employeeRepository.findByEmployeeId(directReports.get(i).getEmployeeId());
             List<Employee> curEmpReports = curEmp.getDirectReports();
+
             if(!Objects.isNull(curEmpReports) && curEmpReports.size() > 0){
+                //potential for halting problem exists here
+                directReports.addAll(curEmpReports);
+                //if the graph of the reporting structure contains a cycle (eg john reports to ringo reports tojohn), this could lead to an infinite loop.
+                //however, it doesn't currently. a 500 error is quickly returned to the client when a cycle exists.
 
-                //potential for halting problem is here
-                directReports.addAll(curEmpReports); // add all of the current employees reports
-
-                /*
-                    If the tree of reports contains a cycle, this could lead to an infinite loop. (although it doesn't currently, it results in a 500 response)
-                    A potential solution could be to make the directReports list a hashset from the start, to prevent duplicates from being added.
-                    I *would* investigate this more, but I was asked to limit the amount of time I spent, so I'll have to move on.
-                */
             }
         }
 
