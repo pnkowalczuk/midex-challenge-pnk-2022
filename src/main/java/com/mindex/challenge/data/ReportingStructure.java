@@ -15,10 +15,9 @@ public class ReportingStructure {
 
     public ReportingStructure(String id, EmployeeRepository employeeRepository){
         this.employeeId = id;
-        List<Employee> reportingEmployees = employeeRepository.findByEmployeeId(id).getDirectReports();
-        directReports = getTotalReports(reportingEmployees, employeeRepository);
+        //List<Employee> reportingEmployees = employeeRepository.findByEmployeeId(id).getDirectReports();
+        //directReports = getTotalReports(reportingEmployees, employeeRepository);
     }
-
 
 
     public int getTotalReports(List<Employee> directReportsList, EmployeeRepository employeeRepository){
@@ -40,10 +39,15 @@ public class ReportingStructure {
         return directReportsListNoDuplicates.size();
     }
 
+    public void setDirectReports(int directReports){
+        this.directReports = directReports;
+    }
+
     public String getId(){
         return employeeId;
     }
     public int getDirectReports(){
         return directReports;
     }
+
 }
