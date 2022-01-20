@@ -23,7 +23,7 @@ public class ReportingStructure {
     }
 
 
-    //TODO change this to prevent duplicated persons.
+
     public int getTotalReports(List<Employee> directReportsList, EmployeeRepository employeeRepository){
         for(int i = 0; i < directReportsList.size(); i++){
             
@@ -33,10 +33,12 @@ public class ReportingStructure {
                 directReportsList.addAll(curEmpReports);
             }
         }
+
         List<String> employeeIdList = new ArrayList<>();
         for(Employee e : directReportsList){
             employeeIdList.add(e.getEmployeeId());
         }
+
         List<String> directReportsListNoDuplicates = new ArrayList<>(new HashSet<>(employeeIdList));
         return directReportsListNoDuplicates.size();
     }
