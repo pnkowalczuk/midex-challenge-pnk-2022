@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.UUID;
 
 @Service
 public class CompensationServiceImpl implements CompensationService {
@@ -20,12 +21,24 @@ public class CompensationServiceImpl implements CompensationService {
 
     @Override
     public Compensation create(Compensation compensation){
-        return new Compensation();
+        LOG.debug("Creating compensation [{}]", compensation);
+        compensation.setCompensationId(UUID.randomUUID().toString());
+        compensationRepository.insert(compensation);
+        return compensation;
+
     }
 
     @Override
-    public Compensation read(String id){
-        return new Compensation();
+    public Compensation read(String compensationId){
+        Compensation c = compensationRepository.findByCompensationId(compensationId);
+        // Compensation c = new Compensation();
+
+        if (c == null){
+            throw new RuntimeException("Invalid compensationId: " + compensationId);
+        }
+
+        return c;
+
     }
     
 }

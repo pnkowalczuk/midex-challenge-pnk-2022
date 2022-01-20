@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.ArrayList;
 
 import com.mindex.challenge.dao.EmployeeRepository;
-// import org.springframework.beans.factory.annotation.Autowired;
 
 public class ReportingStructure {
     private String employeeId;

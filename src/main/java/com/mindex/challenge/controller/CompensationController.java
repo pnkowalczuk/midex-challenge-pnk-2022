@@ -28,7 +28,7 @@ public class CompensationController {
 
     @GetMapping("/compensation/{id}")
     public Compensation read(@PathVariable String id){
-        return new Compensation();
+        return compensationService.read(id);
     }
 
 }

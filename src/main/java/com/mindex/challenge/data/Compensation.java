@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 
 public class Compensation {
+    private String compensationId;
     private Employee employee;
     private int salary;
     private LocalDate effectiveDate;
@@ -20,6 +21,9 @@ public class Compensation {
         this. effectiveDate = effectiveDate;
     }
 
+    public void setCompensationId(String id){
+        this.compensationId = id;
+    }
     public void setEmployee(Employee employee){
         this.employee = employee;
     }
@@ -28,6 +32,10 @@ public class Compensation {
     }
     public void setEffectiveDate(LocalDate effectiveDate){
         this.effectiveDate = effectiveDate;
+    }
+    
+    public String getCompensationId(String id){
+        return this.compensationId;
     }
 
     public Employee getEmployee(){
