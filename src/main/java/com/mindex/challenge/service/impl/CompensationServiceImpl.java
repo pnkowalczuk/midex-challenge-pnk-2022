@@ -1,7 +1,6 @@
 package com.mindex.challenge.service.impl;
 
 import com.mindex.challenge.dao.CompensationRepository;
-import com.mindex.challenge.dao.EmployeeRepository;
 import com.mindex.challenge.data.Compensation;
 import com.mindex.challenge.service.CompensationService;
 import org.slf4j.Logger;
@@ -27,13 +26,13 @@ public class CompensationServiceImpl implements CompensationService {
     }
 
     @Override
-    public Compensation read(String compensationId){
-        LOG.debug("Recieved compensation read request for compensation [{}]", compensationId);
+    public Compensation read(String id){
+        LOG.debug("Recieved compensation read request for compensation [{}]", id);
         
-        Compensation c = compensationRepository.findByCompensationId(compensationId);
+        Compensation c = compensationRepository.findByCompensationId(id);
         
         if (c == null){
-            throw new RuntimeException("Invalid compensationId: " + compensationId);
+            throw new RuntimeException("Invalid compensationId: " + id);
         }
 
         return c;
