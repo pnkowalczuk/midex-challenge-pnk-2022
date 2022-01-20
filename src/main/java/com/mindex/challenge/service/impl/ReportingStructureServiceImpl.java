@@ -27,13 +27,20 @@ public class ReportingStructureServiceImpl implements ReportingStructureService{
 
     private int getCountDistinctReports(String id){
         List<Employee> directReports = employeeRepository.findByEmployeeId(id).getDirectReports();
-        //list of employees listed under "reports" for employee w/ given id
 
         for(int i = 0; i < directReports.size(); i++){
-            Employee curEmp = employeeRepository.findByEmployeeId(directReports.get(i).getEmployeeId()); // current employee in directReports list above
+            Employee curEmp = employeeRepository.findByEmployeeId(directReports.get(i).getEmployeeId());
             List<Employee> curEmpReports = curEmp.getDirectReports();
             if(!Objects.isNull(curEmpReports) && curEmpReports.size() > 0){
+
+                //potential for halting problem is here
                 directReports.addAll(curEmpReports); // add all of the current employees reports
+
+                /*
+                    If the tree of reports contains a cycle, this could lead to an infinite loop. (although it doesn't currently, it results in a 500 response)
+                    A potential solution could be to make the directReports list a hashset from the start, to prevent duplicates from being added.
+                    I *would* investigate this more, but I was asked to limit the amount of time I spent, so I'll have to move on.
+                */
             }
         }
 
@@ -43,7 +50,6 @@ public class ReportingStructureServiceImpl implements ReportingStructureService{
         }
 
         List<String> extendedReportsNoDuplicates = new ArrayList<>(new HashSet<>(employeeIdList)); // Cast to hashset to remove dupes.
-
 
         return extendedReportsNoDuplicates.size();
     }
