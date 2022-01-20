@@ -32,8 +32,13 @@ public class ReportingStructureServiceImpl implements ReportingStructureService{
         for(int i = 0; i < directReports.size(); i++){
             Employee curEmp = employeeRepository.findByEmployeeId(directReports.get(i).getEmployeeId()); // current employee in directReports list above
             List<Employee> curEmpReports = curEmp.getDirectReports();
+
             if(!Objects.isNull(curEmpReports) && curEmpReports.size() > 0){
-                directReports.addAll(curEmpReports); // add all of the current employees reports
+                //potential for halting problem exists here
+                directReports.addAll(curEmpReports);
+                //if the graph of the reporting structure contains a cycle (eg john reports to ringo reports tojohn), this could lead to an infinite loop.
+                //however, it doesn't currently. a 500 error is quickly returned to the client when a cycle exists.
+
             }
         }
 
