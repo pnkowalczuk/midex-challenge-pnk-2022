@@ -33,7 +33,12 @@ public class ReportingStructure {
                 directReportsList.addAll(curEmpReports);
             }
         }
-        return directReportsList.size();
+        List<String> employeeIdList = new ArrayList<>();
+        for(Employee e : directReportsList){
+            employeeIdList.add(e.getEmployeeId());
+        }
+        List<String> directReportsListNoDuplicates = new ArrayList<>(new HashSet<>(employeeIdList));
+        return directReportsListNoDuplicates.size();
     }
 
     public String getId(){
