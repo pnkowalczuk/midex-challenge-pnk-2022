@@ -20,7 +20,7 @@ public class ReportingStructureServiceImpl implements ReportingStructureService{
     EmployeeRepository employeeRepository;
 
     public ReportingStructure compute(String id){
-        ReportingStructure rs = new ReportingStructure(id, employeeRepository);
+        ReportingStructure rs = new ReportingStructure(id);
         rs.setDirectReports(getCountDistinctReports(id));
         return rs;
     }
