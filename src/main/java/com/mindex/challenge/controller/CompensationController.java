@@ -2,7 +2,6 @@ package com.mindex.challenge.controller;
 
 import com.mindex.challenge.data.Compensation;
 import com.mindex.challenge.service.CompensationService;
-import com.mindex.challenge.service.EmployeeService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,15 +14,14 @@ public class CompensationController {
     private static final Logger LOG  = LoggerFactory.getLogger(CompensationController.class);
 
     @Autowired
-    private EmployeeService employeeService;
-    @Autowired
     private CompensationService compensationService;
 
 
 
     @PostMapping("/compensation")
     public Compensation create(@RequestBody Compensation compensation){
-        return compensation;
+
+        return compensationService.create(compensation);
     }
 
     @GetMapping("/compensation/{id}")

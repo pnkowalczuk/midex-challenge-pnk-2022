@@ -8,31 +8,30 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.UUID;
 
 @Service
 public class CompensationServiceImpl implements CompensationService {
     private static final Logger LOG = LoggerFactory.getLogger(CompensationServiceImpl.class);
 
     @Autowired
-    private EmployeeRepository employeeRepository;
-    @Autowired
     private CompensationRepository compensationRepository;
 
     @Override
     public Compensation create(Compensation compensation){
         LOG.debug("Creating compensation [{}]", compensation);
-        compensation.setCompensationId(UUID.randomUUID().toString());
+        
+        compensation.setCompensationId(compensation.getEmployee().getEmployeeId());
         compensationRepository.insert(compensation);
-        return compensation;
 
+        return compensation;
     }
 
     @Override
     public Compensation read(String compensationId){
+        LOG.debug("Recieved compensation read request for compensation [{}]", compensationId);
+        
         Compensation c = compensationRepository.findByCompensationId(compensationId);
-        // Compensation c = new Compensation();
-
+        
         if (c == null){
             throw new RuntimeException("Invalid compensationId: " + compensationId);
         }

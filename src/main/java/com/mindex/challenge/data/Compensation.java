@@ -16,6 +16,7 @@ public class Compensation {
     }
 
     public Compensation(Employee employee, int salary, LocalDate effectiveDate){
+        this.compensationId = null;
         this.employee = employee;
         this.salary = salary;
         this. effectiveDate = effectiveDate;
