@@ -1,6 +1,7 @@
 package com.mindex.challenge.controller;
 
 import com.mindex.challenge.data.Compensation;
+import com.mindex.challenge.service.CompensationService;
 import com.mindex.challenge.service.EmployeeService;
 
 import org.slf4j.Logger;
@@ -15,6 +16,8 @@ public class CompensationController {
 
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private CompensationService compensationService;
 
 
 
