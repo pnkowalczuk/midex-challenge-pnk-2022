@@ -35,8 +35,7 @@ public class ReportingStructureServiceImpl implements ReportingStructureService{
             if(!Objects.isNull(curEmpReports) && curEmpReports.size() > 0){
                 //potential for halting problem exists here
                 directReports.addAll(curEmpReports);
-                //if the graph of the reporting structure contains a cycle (eg john reports to ringo reports tojohn), this could lead to an infinite loop.
-                //however, it doesn't currently. a 500 error is quickly returned to the client when a cycle exists.
+                //if the graph of the reporting structure contains a cycle (eg john reports to ringo reports tojohn), this will lead to an infinite loop.
 
             }
         }
