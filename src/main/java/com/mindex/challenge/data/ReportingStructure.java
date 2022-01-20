@@ -17,8 +17,6 @@ public class ReportingStructure {
         this.employeeId = id;
         List<Employee> reportingEmployees = employeeRepository.findByEmployeeId(id).getDirectReports();
         directReports = getTotalReports(reportingEmployees, employeeRepository);
-
-
     }
 
 
